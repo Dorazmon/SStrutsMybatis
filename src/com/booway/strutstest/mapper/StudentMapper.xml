@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booway.strutstest.mapper.StudentMapper">
+
+	<insert id="addStudent"
+		parameterType="com.booway.strutstest.entity.Student">
+		insert into tbl_student(s_id,s_name,s_age)
+		values(#{id},#{name},#{age})
+	</insert>
+
+	<delete id="deleteStudentById" parameterType="String">
+		delete from tbl_student
+		where s_id=#{id}
+	</delete>
+
+	<update id="updateStudent"
+		parameterType="com.booway.strutstest.entity.Student">
+		update tbl_student set
+		s_name=#{name},s_age=#{age} 
+		where s_id=#{id}
+	</update>
+
+	<select id="getStudentById" parameterType="String"
+		resultType="com.booway.strutstest.entity.Student">
+		select s_id as id ,s_name as name , s_age as age 
+		from tbl_student 
+		where s_id=#{id}
+	</select>
+    
+    <select id="getStudents" parameterType="String"
+		resultType="com.booway.strutstest.entity.Student">
+		select s_id as id ,s_name as name , s_age as age 
+		from tbl_student 
+	</select>
+	
+	<select id="getStudentCount" resultType="java.lang.Long">
+	   select count(*)  from tbl_student
+	</select>
+	
+	<select id="getStudentByPage" resultType="com.booway.strutstest.entity.Student">
+	select s_id as id ,s_name as name , s_age as age 
+	from tbl_student
+	limit ${(currentPage-1)*rows},${rows}
+	</select>
+	
+    
+
+</mapper>

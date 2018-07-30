@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- Struts 2配置文件的根元素 -->
+<struts>
+	
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!--配置过滤器不拦截静态资源  -->
+	<constant name="struts.action.excludePattern"
+		value="/resources/.*?" />
+	<!-- 配置了系列常量 action由spring创建 -->
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<package name="lee" extends="struts-default"
+		namespace="/Student">
+		<!-- 定义处理用户请求的Action name对应uri class对应bean的id -->
+		<action name="page" class="studentAction" method="pageStudents">
+			<!-- 逻辑视图配置视图页面 -->
+			<result name="student">/WEB-INF/student/student.jsp</result>
+		</action>
+		<action name="student" class="studentAction"
+			method="pageStudents">
+			<!-- 逻辑视图配置视图页面 -->
+			<result name="student">/WEB-INF/student/student.jsp</result>
+		</action>
+		<action name="add" method="addStudent" class="studentAction">
+			<result name="student" type="chain">page</result>
+		</action>
+		<action name="update" method="updateStudent"
+			class="studentAction">
+			<result name="student" type="chain">page</result>
+		</action>
+		<action name="get" method="getStudentById"
+			class="studentAction">
+
+		</action>
+		<action name="delete" method="deleteStudentById"
+			class="studentAction">
+			<result name="student" type="chain">page</result>
+		</action>
+
+
+	</package>
+</struts>
